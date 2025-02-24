@@ -1,1 +1,3 @@
-using base::r
+Breaking up long sentences using the nearest blanks before a chosen max-value, using base::r.
+
+In progress: Trying to implement hyphenation using the "sylly" library...
