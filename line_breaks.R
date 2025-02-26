@@ -29,21 +29,21 @@ for (i in 1:2){
   cat(paste0("\nmax_length: ", max_length, "\n-----------\n", result_string, "\n\n"))
 }
 
-#-------------- try hyphenation + + + first steps --------------#
 
-
+#-------------- hyphenation + + + first steps --------------#
 library(sylly)
 library(sylly.en)
-#library(sylly.de) #--> not available for R-Version 4.4.2
+library(sylly.de) #--> https://undocumeantit.github.io/repos/l10n/pckg/sylly.de/index.html
 
 sampleText = c("This", "is", "a", "rather", "stupid", "demonstration")
 Beispieltxt = c("Lange", "Wörter", "Beispiel", "Burgturm", "Haustür", "Schlüsselloch", "Schlauchboot")
 
-
 hyph.txt.en <- hyphen(sampleText, hyph.pattern="en")
-#hyph.txt.en <- hyphen(Beispieltxt, hyph.pattern="de")
+hyph.txt.de <- hyphen(Beispieltxt, hyph.pattern="de")
 
 print(hyph.txt.en)
+print(hyph.txt.de)
+
 
 
 
