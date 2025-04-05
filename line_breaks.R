@@ -36,13 +36,18 @@ library(sylly.en)
 library(sylly.de) #--> https://undocumeantit.github.io/repos/l10n/pckg/sylly.de/index.html
 
 sampleText = c("This", "is", "a", "rather", "stupid", "demonstration")
-Beispieltxt = c("Lange", "Wörter", "Beispiel", "Burgturm", "Haustür", "Schlüsselloch", "Schlauchboot")
+#Beispieltxt = c("Lange", "Wörter", "Beispiel", "Burgturm", "Haustür", "Schlüsselloch", "Schlauchboot")
+Beispieltxt = "Schlauchboot"
 
 hyph.txt.en <- hyphen(sampleText, hyph.pattern="en")
 hyph.txt.de <- hyphen(Beispieltxt, hyph.pattern="de")
 
 print(hyph.txt.en)
-print(hyph.txt.de)
+print("")
+print(unlist(hyph.txt.de))
+print(hyph.txt.de[1])
+
+
 
 
 
