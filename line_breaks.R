@@ -30,24 +30,31 @@ for (i in 1:2){
 }
 
 
-#-------------- hyphenation + + + first steps --------------#
+#-------------- hyphenation --------------#
 library(sylly)
 library(sylly.en)
 library(sylly.de) #--> https://undocumeantit.github.io/repos/l10n/pckg/sylly.de/index.html
 
 sampleText = c("This", "is", "a", "rather", "stupid", "demonstration")
-#Beispieltxt = c("Lange", "Wörter", "Beispiel", "Burgturm", "Haustür", "Schlüsselloch", "Schlauchboot")
-Beispieltxt = "Schlauchboot"
+Beispieltxt = c("Lange", "Wörter", "Beispiel", "Burgturm", "Haustür", "Schlüsselloch", "Schlauchboot")
+#print(hyph.txt.en = hyphen(sampleText, hyph.pattern="en"))
+#print(hyph.txt.de = hyphen(Beispieltxt, hyph.pattern="de"))
 
-hyph.txt.en <- hyphen(sampleText, hyph.pattern="en")
-hyph.txt.de <- hyphen(Beispieltxt, hyph.pattern="de")
+print(hyph.txt.de[6]$word)
 
-print(hyph.txt.en)
-print("")
-print(unlist(hyph.txt.de))
-print(hyph.txt.de[1])
+breakword = function(getword, lang = "en"){
+  if (lang == "en"){
+    brword = hyphen(getword, hyph.pattern="en")}
+  else{
+    brword = hyphen(getword, hyph.pattern="de")}
+  brword = brword[1]$word
+  brword = (sub("-", "_", brword, fixed = T))
+  brword = (gsub("-", "", brword, fixed = T))
+  brword = (sub("_", "-\n", brword, fixed = T))  
+  return(brword)
+}
 
-hyph.support.de()
+cat(breakword("Schlauchboot", "de"))
 
 
 
