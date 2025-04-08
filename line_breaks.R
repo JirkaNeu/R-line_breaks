@@ -47,7 +47,7 @@ print("")
 print(unlist(hyph.txt.de))
 print(hyph.txt.de[1])
 
-
+hyph.support.de()
 
 
 
