@@ -1,3 +1,5 @@
-Breaking up long sentences at the nearest blank before the set max-value, using base::r.
+In this script two methods are being applied for breaking up long sentences at a variable max length:
 
-In progress: Trying to implement hyphenation using the "sylly" library...
+a) using base::r - sentences will be simply line broken at the nearest blank before the max length, without splitting words
+
+b) using "sylly" library (eng and ger) - each word exceeding the max length of a line is being checked for possible hyphenation and will be split if the max length is not exceeded
