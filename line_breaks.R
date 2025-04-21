@@ -1,7 +1,11 @@
 
 # https://en.wikipedia.org/wiki/Moby-Dick
+
 my_string = "When Ahab finally appears on the quarterdeck, he announces he seeks revenge on the white whale that took his leg from the knee down, leaving him with a prosthesis fashioned from a whale's jawbone. Ahab will give the first man to sight Moby Dick a doubloon, which he nails to the mast. Starbuck objects that he has not come for vengeance but for profit, but Ahab's purpose exercises a mysterious spell on Ishmael: Ahab's quenchless feud seemed mine."
 my_length = 85 #--> set max length for line breaks
+
+result_a = c() #--> without hyphenation
+result_b = c() #--> including hyhenation
 
 for (i in 1:2){
   max_length = round(my_length/i)
@@ -26,7 +30,8 @@ for (i in 1:2){
     result_string = paste(result_string, collapse = "\n")
   }else result_string = paste0("- value to small, nothing changed -\n", my_string)
 
-  cat(paste0("\nmax_length: ", max_length, "\n-----------\n", result_string, "\n\n"))
+  #cat(paste0("\nmax_length: ", max_length, "\n-----------\n", result_string, "\n\n"))
+  result_a[i] = paste0("\nmax_length: ", max_length, "\n-----------\n", result_string, "\n\n")
 }
 
 
@@ -34,14 +39,6 @@ for (i in 1:2){
 library(sylly)
 library(sylly.en)
 library(sylly.de) #--> https://undocumeantit.github.io/repos/l10n/pckg/sylly.de/index.html
-
-sampleText = c("This", "is", "a", "rather", "stupid", "demonstration", "will")
-#Beispieltxt = c("Burgturm", "Haustür", "Schlüsselloch", "Schlauchboot")
-
-hyph.txt.en = hyphen(sampleText, hyph.pattern="en")
-print(hyph.txt.en)
-#hyph.txt.de = hyphen(Beispieltxt, hyph.pattern="de")
-#print(hyph.txt.de)
 
 
 breakword = function(getword, lang = "en"){
@@ -91,15 +88,12 @@ for (i in 1:2){
       space_next = min(which(strsplit(get_word, "")[[1]]==" ")) #--> next blank
       get_word = substr(get_word, 1, space_next - 1)
       get_word = breakword(get_word, "en")
-      if (nchar(Teilsatz) + nchar(get_word[[1]][1]) <= max_length){
-        #
-        ttttest = ttttest + 1
-        print(get_word)
-        print(ttttest)
-        #
-        Teilsatz = paste(Teilsatz, get_word[[1]][1])
-        space_last = space_last + nchar(get_word[[1]][1]) -1
+      if (grepl("-", get_word) == T){
+        if (nchar(Teilsatz) + nchar(get_word[[1]][1]) <= max_length){
+          Teilsatz = paste(Teilsatz, get_word[[1]][1])
+          space_last = space_last + nchar(get_word[[1]][1]) -1
         }
+      }
 
       result_string = c(result_string, Teilsatz)
       if (x_test > all_length){break}; x_test = x_test + 1 #--> security check
@@ -107,8 +101,16 @@ for (i in 1:2){
     result_string = paste(result_string, collapse = "\n")
   }else result_string = paste0("- value to small, nothing changed -\n", my_string)
   
-  cat(paste0("\nmax_length: ", max_length, "\n-----------\n", result_string, "\n\n"))
+  #cat(paste0("\nmax_length: ", max_length, "\n-----------\n", result_string, "\n\n"))
+  result_b[i] = paste0("\nmax_length: ", max_length, "\n-----------\n", result_string, "\n\n")
 }
+
+
+cat(result_a[1])
+cat(result_b[1])
+cat(result_a[2])
+cat(result_b[2])
+
 
 
 
