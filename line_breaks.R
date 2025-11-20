@@ -35,6 +35,7 @@ for (i in 1:2){
 }
 
 
+
 #-------------- hyphenation --------------#
 library(sylly)
 library(sylly.en)
@@ -105,6 +106,8 @@ for (i in 1:2){
   result_b[i] = paste0("\nmax_length: ", max_length, "\n-----------\n", result_string, "\n\n")
 }
 
+
+writeLines(strwrap(my_string, width = my_length, indent = 5))
 
 cat(result_a[1])
 cat(result_b[1])
